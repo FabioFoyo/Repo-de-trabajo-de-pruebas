@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atención al Cliente - Hanoy's</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js"></script>
+</head>
+<body>
+        <!-- Cabecera -->
+    <header>
+        <h1>Atención Ciudadana </h1>
+        <p>Mediante los comentarios y quejas podemos mejorar nuestros servicios para satisfacer aún más al cliente.</p>
+    </header>
+
+    <!-- Navegación -->
+    <nav>
+        <a href="index.html">inicio</a>
+        <a href="Nosotros.html">Acerca de Nosotros</a>
+        <a href="servicios.html">Servicios</a>
+        <a href="event.html">Eventos</a>
+        <a href="multimedia.html">Multimedia</a>
+        <a href="atencion.html">Atención al Cliente</a>
+    </nav>
+
+    <!-- Contenido Principal -->
+    <h2>Formulario de Plantiamientos</h2>
+<form action="procesar.php" method="POST" id="formulario">
+    <input type="hidden" name="fecha" value="<?= date('Y-m-d') ?>">
+    
+    <label for="tipo">Selecciona una opción:</label>
+    <select name="tipo" id="tipo"  onchange="mostrarCampos(this.value)">
+        <option value="">Selecciona</option>
+        <option value="comentario">Comentario</option>
+        <option value="queja">Queja</option>
+    </select>
+
+    <!-- Comentario -->
+    <div id="comentarioSection" class="hidden">
+        <textarea name="comentario" placeholder="Déjanos saber tu criterio aquí..." ></textarea>
+    </div>
+
+    <!-- Queja -->
+    <div id="quejaSection" class="hidden">
+        <label for="tipoQueja">Tipo de queja:</label>
+        <select name="tipoQueja" id="tipoQueja"  onchange="mostrarDatosPersonales(this.value)">
+            <option value="">Selecciona</option>
+            <option value="personal">Personal</option>
+            <option value="anonima">Anónima</option>
+        </select>
+
+        <div id="datosPersonales" class="hidden">
+            <input type="text" name="nombre" placeholder="Nombre y apellidos" >
+            <input type="text" name="direccion" placeholder="Dirección particular" >
+            <input type="email" name="email" placeholder="Correo Electrónico" >
+            <input type="tel" name="telefono" placeholder="Número de Teléfono" >
+        </div>
+
+        <textarea name="planteamiento" placeholder="Déjanos saber tu criterio aquí..." ></textarea>
+    </div>
+
+    <button type="submit">Enviar</button>
+</form>
+
+    <!-- Pie de Página -->
+    <footer>
+        <p>Última actualización: <span id="lastModified"></span></p>
+        <script>
+            document.getElementById(`lastModified`).textContent = document.lastModified;
+        </script>
+            <!-- Redes Sociales -->
+        <h3>Síguenos en nuestras redes:</h3>
+        <a href="https://facebook.com/hanoys"  target="_blank">Facebook</a> |
+        <a href="https://twitter.com/hanoys"  target="_blank">Twitter</a> |
+        <a href="https://enlared.cu/hanoys"  target="_blank">En la Red</a>
+        <p>&copy; 2025 Hanoy's - Todos los derechos reservados</p>
+        <p><a href="index.html">Volver al Inicio</a></p>
+    </footer>
+
+    <script>
+            // Verificar si la URL tiene el parámetro ?success=1
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.has('success')) {
+        const mensajeExito = document.createElement('div');
+        mensajeExito.style.position = 'fixed';
+        mensajeExito.style.top = '20px';
+        mensajeExito.style.right = '20px';
+        mensajeExito.style.backgroundColor = '#d4edda';
+        mensajeExito.style.color = '#155724';
+        mensajeExito.style.padding = '15px';
+        mensajeExito.style.borderRadius = '5px';
+        mensajeExito.style.zIndex = '1000';
+        mensajeExito.innerHTML = 'Tu planteamiento ha sido guardado con éxito. <a href="atencion.html" style="color: #155724; text-decoration: underline;">Volver al formulario</a>';
+        document.body.appendChild(mensajeExito);
+    }
+
+    </script>
+
+</body>
+</html>
